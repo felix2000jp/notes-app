@@ -20,3 +20,29 @@ export const GetNote = {
 		}),
 	},
 };
+
+// Get Notes Page Contract
+export const GetNotePage = {
+	tags: ["Note"],
+	description: "Get one page of notes. Each page has 10 notes.",
+	querystring: Type.Object({
+		Page: Type.Number(),
+	}),
+	response: {
+		200: Type.Object({
+			Notes: Type.Array(
+				Type.Object({
+					ID: Type.String({ format: "uuid" }),
+					Name: Type.String(),
+					Text: Type.String(),
+				}),
+			),
+			Total: Type.Number(),
+			StatusCode: Type.String({ default: "OK" }),
+		}),
+		500: Type.Object({
+			StatusCode: Type.String({ default: "ERROR" }),
+			ErrorMessage: Type.String(),
+		}),
+	},
+};

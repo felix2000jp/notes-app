@@ -1,7 +1,7 @@
 import { FastifyRequest, FastifyReply } from "fastify";
 
 import prisma from "../../Utils/Prisma";
-import ErrorMessages from "../../Utils/Errors";
+import UserErrors from "../../Errors/UserErrors";
 import * as Contracts from "./Contracts";
 import * as Hashing from "../../Utils/Hashing";
 
@@ -10,7 +10,7 @@ export const SignUp = async (req: FastifyRequest<{ Body: typeof Contracts.SignUp
 	try {
 		// Verify that there no other user with the same elamil
 		const user = await prisma.user.findUnique({ where: { Email: req.body.Email } });
-		if (user) throw new Error(ErrorMessages.USER_NOT_UNIQUE);
+		if (user) throw new Error(UserErrors.USER_NOT_UNIQUE);
 
 		// We hash the password and save the user
 		const hash = await Hashing.hashPassword(req.body.Password);
@@ -27,11 +27,11 @@ export const SignIn = async (req: FastifyRequest<{ Body: typeof Contracts.SignIn
 	try {
 		// We verify the User exists
 		const user = await prisma.user.findUnique({ where: { Email: req.body.Email } });
-		if (!user) throw new Error(ErrorMessages.USER_NOT_FOUND);
+		if (!user) throw new Error(UserErrors.USER_NOT_FOUND);
 
 		// We verify that the password is correct
 		const isValid = await Hashing.checkPassword(user.Password, req.body.Password);
-		if (!isValid) throw new Error(ErrorMessages.USER_PASSWORD);
+		if (!isValid) throw new Error(UserErrors.USER_PASSWORD);
 
 		// We create the AccessToken and return the response
 		const accessToken = await res.jwtSign({ ID: user.ID }, { expiresIn: "3h" });
