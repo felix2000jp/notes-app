@@ -20,3 +20,26 @@ export const GetNote = async (req: FastifyRequest<{ Params: typeof Contracts.Get
 		return await res.status(500).send({ ErrorMessage: (error as Error).message });
 	}
 };
+
+// Get Notes Page Controller
+export const GetNotesPage = async (
+	req: FastifyRequest<{ Querystring: typeof Contracts.GetNotesPage.querystring.static }>,
+	res: FastifyReply,
+) => {
+	try {
+		const notesPerPage = 10;
+
+		// We get the total number of notes belonging to this user and and a page of 10 notes ordered by their name
+		const total = await prisma.note.count({ where: { ID: req.user.ID } });
+		const notes = await prisma.note.findMany({
+			where: { ID: req.user.ID },
+			skip: notesPerPage * (req.query.Page - 1),
+			take: notesPerPage,
+			orderBy: { Name: "desc" },
+		});
+
+		return await res.status(200).send({ Notes: notes, Total: total });
+	} catch (error) {
+		return await res.status(500).send({ ErrorMessage: (error as Error).message });
+	}
+};

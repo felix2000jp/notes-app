@@ -5,7 +5,6 @@ export const SignUp = {
 	tags: ["Auth"],
 	description: "Sign Up a new user.",
 	body: Type.Object({
-		Name: Type.String(),
 		Email: Type.String({ format: "email" }),
 		Password: Type.String(),
 	}),
