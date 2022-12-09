@@ -9,6 +9,7 @@ import FastifyJWT from "@fastify/jwt";
 import verifyJWT from "./Decorators/JWT";
 
 import authRoutes from "./Features/Auth/Routes";
+import userRoutes from "./Features/User/Routes";
 
 const buildApp = async () => {
 	const app = Fastify();
@@ -29,6 +30,7 @@ const buildApp = async () => {
 
 	// Routes
 	await app.register(authRoutes, { prefix: "/api/auth" });
+	await app.register(userRoutes, { prefix: "/api/user" });
 	app.after(() => console.log("ROUTES --------> LOADED"));
 
 	// The server is ready to be accessed

@@ -5,12 +5,23 @@ import * as Controllers from "./Controllers";
 
 const userRoutes = async (app: FastifyInstance) => {
 	// Get Signed In User Info
+	app.get(
+		"/",
+		{
+			preHandler: app.verifyJWT as any,
+			schema: Contracts.GetSignedInUserSchema,
+		},
+		Controllers.GetSignedInUserController,
+	);
 
 	// Delete Signed In User
 	app.delete(
 		"/",
-		{ preHandler: app.verifyJWT as any, schema: Contracts.DeleteSignedInUserSchema },
-		Controllers.deleteSignInUserController,
+		{
+			preHandler: app.verifyJWT as any,
+			schema: Contracts.DeleteSignedInUserSchema,
+		},
+		Controllers.DeleteSignInUserController,
 	);
 };
 
