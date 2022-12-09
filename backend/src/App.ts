@@ -5,6 +5,10 @@ import FastifyJWT from "@fastify/jwt";
 import fastifySwagger from "@fastify/swagger";
 import FastifySwaggerUi from "@fastify/swagger-ui";
 
+import verifyJWT from "./Decorators/JWT";
+
+import authRoutes from "./Features/Auth/Routes";
+
 const buildApp = async () => {
 	const app = Fastify();
 
@@ -19,9 +23,11 @@ const buildApp = async () => {
 	app.after(() => console.log("PLUGINS -------> LOADED"));
 
 	// Decorators
+	app.decorate("verifyJWT", verifyJWT);
 	app.after(() => console.log("DECORATORS ----> LOADED"));
 
 	// Routes
+	await app.register(authRoutes, { prefix: "/api/auth" });
 	app.after(() => console.log("ROUTES --------> LOADED"));
 
 	// The server is ready to be accessed
