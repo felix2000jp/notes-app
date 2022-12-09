@@ -1,6 +1,6 @@
 import { Type } from "@sinclair/typebox";
 
-// Sign Up Schema
+// Sign Up Contract
 export const SignUp = {
 	tags: ["Auth"],
 	description: "Sign Up a new user.",
@@ -20,7 +20,7 @@ export const SignUp = {
 	},
 };
 
-// Sign In Schema
+// Sign In Contract
 export const SignIn = {
 	tags: ["Auth"],
 	description: "Sign Up an existing user.",

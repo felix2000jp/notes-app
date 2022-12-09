@@ -1,14 +1,14 @@
 import { FastifyRequest, FastifyReply } from "fastify";
 
 import prisma from "../../Utils/Prisma";
-// import * as Contracts from "./Contracts";
+import ErrorMessages from "../../Utils/Errors";
 
-// Get the Signed In User Information
+// Get Signed In User Controller
 export const GetSignedInUser = async (req: FastifyRequest, res: FastifyReply) => {
 	try {
 		// We verify the User exists
 		const user = await prisma.user.findUnique({ where: { ID: req.user.ID } });
-		if (!user) throw new Error("User does not exist");
+		if (!user) throw new Error(ErrorMessages.USER_NOT_FOUND);
 
 		return await res.status(200).send(user);
 	} catch (error) {
@@ -16,12 +16,12 @@ export const GetSignedInUser = async (req: FastifyRequest, res: FastifyReply) =>
 	}
 };
 
-// Delete Signed In User
+// Delete Signed In User Controller
 export const DeleteSignInUser = async (req: FastifyRequest, res: FastifyReply) => {
 	try {
 		// We verify the User exists
 		const user = await prisma.user.findUnique({ where: { ID: req.user.ID } });
-		if (!user) throw new Error("User does not exist");
+		if (!user) throw new Error(ErrorMessages.USER_NOT_FOUND);
 
 		// We delete the user
 		await prisma.user.delete({ where: { ID: user.ID } });
