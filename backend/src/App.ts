@@ -31,7 +31,7 @@ const buildApp = async () => {
 	app.after(() => console.log("ROUTES --------> LOADED"));
 
 	// The server is ready to be accessed
-	app.ready(() => console.log("SERVER --------> READY"));
+	app.ready(() => console.log("\nSERVER --------> READY"));
 	return app;
 };
 
