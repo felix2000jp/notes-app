@@ -4,7 +4,7 @@ import prisma from "../../Utils/Prisma";
 // import * as Contracts from "./Contracts";
 
 // Get the Signed In User Information
-export const GetSignedInUserController = async (req: FastifyRequest, res: FastifyReply) => {
+export const GetSignedInUser = async (req: FastifyRequest, res: FastifyReply) => {
 	try {
 		// We verify the User exists
 		const user = await prisma.user.findUnique({ where: { ID: req.user.ID } });
@@ -17,7 +17,7 @@ export const GetSignedInUserController = async (req: FastifyRequest, res: Fastif
 };
 
 // Delete Signed In User
-export const DeleteSignInUserController = async (req: FastifyRequest, res: FastifyReply) => {
+export const DeleteSignInUser = async (req: FastifyRequest, res: FastifyReply) => {
 	try {
 		// We verify the User exists
 		const user = await prisma.user.findUnique({ where: { ID: req.user.ID } });

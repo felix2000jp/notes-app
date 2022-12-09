@@ -5,22 +5,10 @@ import * as Controllers from "./Controllers";
 
 const authRoutes = async (app: FastifyInstance): Promise<void> => {
 	// Sign Up Route
-	app.post(
-		"/signup",
-		{
-			schema: Contracts.SignUpSchema,
-		},
-		Controllers.signUpController,
-	);
+	app.post("/signup", { schema: Contracts.SignUp }, Controllers.SignUp);
 
 	// Sign In Route
-	app.post(
-		"/signin",
-		{
-			schema: Contracts.SignInSchema,
-		},
-		Controllers.signInController,
-	);
+	app.post("/signin", { schema: Contracts.SignIn }, Controllers.SignIn);
 };
 
 export default authRoutes;

@@ -1,7 +1,7 @@
 import { Type } from "@sinclair/typebox";
 
 // Sign Up Schema
-export const SignUpSchema = {
+export const SignUp = {
 	tags: ["Auth"],
 	description: "Sign Up a new user.",
 	body: Type.Object({
@@ -21,7 +21,7 @@ export const SignUpSchema = {
 };
 
 // Sign In Schema
-export const SignInSchema = {
+export const SignIn = {
 	tags: ["Auth"],
 	description: "Sign Up an existing user.",
 	body: Type.Object({

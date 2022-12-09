@@ -1,7 +1,7 @@
 import { Type } from "@sinclair/typebox";
 
 // Get Signed In User Information Schema
-export const GetSignedInUserSchema = {
+export const GetSignedInUser = {
 	tags: ["User"],
 	description: "Get the signed in user information.",
 	response: {
@@ -18,7 +18,7 @@ export const GetSignedInUserSchema = {
 };
 
 // Delete Signed In User Schema
-export const DeleteSignedInUserSchema = {
+export const DeleteSignedInUser = {
 	tags: ["User"],
 	description: "Delete the signed in user.",
 	response: {

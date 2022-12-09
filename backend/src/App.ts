@@ -16,7 +16,7 @@ const buildApp = async () => {
 
 	// Swagger Setup
 	await app.register(fastifySwagger, { mode: "dynamic" });
-	await app.register(FastifySwaggerUi, { routePrefix: "/documentation" });
+	await app.register(FastifySwaggerUi, { routePrefix: "/docs" });
 	app.after(() => console.log("SWAGGER -------> LOADED"));
 
 	// Plugin

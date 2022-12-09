@@ -4,10 +4,7 @@ import prisma from "../../Utils/Prisma";
 import * as Contracts from "./Contracts";
 import * as Hashing from "../../Utils/Hashing";
 
-export const signUpController = async (
-	req: FastifyRequest<{ Body: typeof Contracts.SignUpSchema.body.static }>,
-	res: FastifyReply,
-) => {
+export const SignUp = async (req: FastifyRequest<{ Body: typeof Contracts.SignUp.body.static }>, res: FastifyReply) => {
 	try {
 		// Verify that there no other user with the same elamil
 		const user = await prisma.user.findUnique({ where: { Email: req.body.Email } });
@@ -23,10 +20,7 @@ export const signUpController = async (
 	}
 };
 
-export const signInController = async (
-	req: FastifyRequest<{ Body: typeof Contracts.SignInSchema.body.static }>,
-	res: FastifyReply,
-) => {
+export const SignIn = async (req: FastifyRequest<{ Body: typeof Contracts.SignIn.body.static }>, res: FastifyReply) => {
 	try {
 		// We verify the User exists
 		const user = await prisma.user.findUnique({ where: { Email: req.body.Email } });

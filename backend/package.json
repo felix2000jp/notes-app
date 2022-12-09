@@ -4,7 +4,8 @@
 	"version": "0.0.0",
 	"private": "true",
 	"scripts": {
-		"dev": "ts-node --transpileOnly --files src/main.ts"
+		"dev": "ts-node --files src/main.ts",
+		"prd": "ts-node --transpileOnly --files src/main.ts"
 	},
 	"dependencies": {
 		"@fastify/cors": "^8.2.0",
