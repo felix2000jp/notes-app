@@ -23,7 +23,7 @@ export const SignUpSchema = {
 // Sign In Schema
 export const SignInSchema = {
 	tags: ["Auth"],
-	description: "Sign Up an existing user",
+	description: "Sign Up an existing user.",
 	body: Type.Object({
 		Email: Type.String({ format: "email" }),
 		Password: Type.String(),
