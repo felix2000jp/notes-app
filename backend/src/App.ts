@@ -1,9 +1,10 @@
 import Fastify from "fastify";
-import FastifyCORS from "@fastify/cors";
-import FastifyJWT from "@fastify/jwt";
 
 import fastifySwagger from "@fastify/swagger";
 import FastifySwaggerUi from "@fastify/swagger-ui";
+
+import FastifyCORS from "@fastify/cors";
+import FastifyJWT from "@fastify/jwt";
 
 import verifyJWT from "./Decorators/JWT";
 
