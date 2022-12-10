@@ -89,3 +89,21 @@ export const UpdateNote = {
 		}),
 	},
 };
+
+// Delete Note Contract
+export const DeleteNote = {
+	tags: ["Note"],
+	description: "Delete an existing note belonging to the signed in user.",
+	params: Type.Object({
+		ID: Type.String({ format: "uuid" }),
+	}),
+	response: {
+		200: Type.Object({
+			StatusCode: Type.String({ default: "OK" }),
+		}),
+		500: Type.Object({
+			StatusCode: Type.String({ default: "ERROR" }),
+			ErrorMessage: Type.String(),
+		}),
+	},
+};

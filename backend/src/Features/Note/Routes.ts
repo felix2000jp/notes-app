@@ -15,6 +15,9 @@ const noteRoutes = async (app: FastifyInstance) => {
 
 	// Update Note Route
 	app.patch("/:ID", { preHandler: app.verifyJWT as any, schema: Contracts.UpdateNote }, Controllers.UpdateNote);
+
+	// Delete Note Route
+	app.delete("/:ID", { preHandler: app.verifyJWT as any, schema: Contracts.DeleteNote }, Controllers.DeleteNote);
 };
 
 export default noteRoutes;

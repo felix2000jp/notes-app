@@ -80,3 +80,22 @@ export const UpdateNote = async (
 		return await res.status(500).send({ ErrorMessage: (error as Error).message });
 	}
 };
+
+// Delete Note Controller
+export const DeleteNote = async (req: FastifyRequest<{ Params: typeof Contracts.DeleteNote.params.static }>, res: FastifyReply) => {
+	try {
+		// We verify that the note exists
+		const note = await prisma.note.findUnique({ where: { ID: req.params.ID } });
+		if (!note) throw new Error(NoteErrors.NOTE_NOT_FOUND);
+
+		// We verify that the notes belongs to the signed in user
+		if (note.UserID !== req.user.ID) throw new Error(PermissionErrors.PERMISSION);
+
+		// We delete the note
+		await prisma.note.delete({ where: { ID: req.params.ID } });
+
+		return await res.status(200).send({});
+	} catch (error) {
+		return await res.status(500).send({ ErrorMessage: (error as Error).message });
+	}
+};
