@@ -1,10 +1,15 @@
 import "./App.scss";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+
+import SignIn from "./Pages/SignIn/SignIn";
 
 const App = () => {
 	return (
-		<div>
-			<h1 className="text-lg">Hello World</h1>
-		</div>
+		<BrowserRouter>
+			<Routes>
+				<Route path="/signin" element={<SignIn />} />
+			</Routes>
+		</BrowserRouter>
 	);
 };
 

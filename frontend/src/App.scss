@@ -1,18 +1,24 @@
 @charset "utf-8";
 
 // Colors
-$black: #0a0a0a;
-$white: #ffffff;
-$dark: #333333;
-$light: #d6d6d6;
+$black : #0A0A0A;
+$white : #FFFFFF;
+$dark  : #333333;
+$light : #D6D6D6;
 
-$primary: #113f67;
-$link: #77d4fc;
-$info: #00ffef;
+$primary : #BA5A31;
+$link    : #FAF3DD;
 
-$success: #157145;
-$danger: #db5461;
-$warning: #ffc145;
+$success : #60A561;
+$warning : #F3C969;
+$danger  : #FE5F55;
+$info    : #3083DC;
+
+// Breakpoints
+$tablet     : 550px;
+$desktop    : 850px;
+$widescreen : 1150px;
+$fullhd     : 1350px;
 
 @import "../node_modules/bulma/sass/base/_all.sass";
 @import "../node_modules/bulma/sass/components/_all.sass";
