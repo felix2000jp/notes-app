@@ -11,16 +11,20 @@ datasource db {
 }
 
 model User {
-  ID       String @id @unique @default(uuid())
-  Email    String @unique
-  Password String
-  Notes    Note[]
+  CreatedAt DateTime @default(now())
+  ID        String   @id @unique @default(uuid())
+  Email     String   @unique
+  Password  String
+  Notes     Note[]
 }
 
 model Note {
-  ID     String @id @unique @default(uuid())
-  Name   String
-  Text   String
-  UserID String
-  User   User   @relation(fields: [UserID], references: [ID], onDelete: Cascade)
+  CreatedAt DateTime @default(now())
+  ID        String   @id @unique @default(uuid())
+  Name      String
+  Text      String
+  UserID    String
+  User      User     @relation(fields: [UserID], references: [ID], onDelete: Cascade)
+
+  @@index([UserID])
 }

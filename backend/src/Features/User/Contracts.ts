@@ -6,6 +6,7 @@ export const GetSignedInUser = {
 	description: "Get the signed in user information.",
 	response: {
 		200: Type.Object({
+			CreatedAt: Type.String({ format: "date-time" }),
 			ID: Type.String({ format: "uuid" }),
 			Email: Type.String({ format: "email" }),
 			StatusCode: Type.String({ default: "OK" }),

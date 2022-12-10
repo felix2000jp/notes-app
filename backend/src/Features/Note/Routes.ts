@@ -7,8 +7,14 @@ const noteRoutes = async (app: FastifyInstance) => {
 	// Get Note Route
 	app.get("/:ID", { preHandler: app.verifyJWT as any, schema: Contracts.GetNote }, Controllers.GetNote);
 
-	// Get Notes Page Route
+	// Get Notes Page By Name Route
 	app.get("/", { preHandler: app.verifyJWT as any, schema: Contracts.GetNotesPage }, Controllers.GetNotesPage);
+
+	// New Note Route
+	app.post("/", { preHandler: app.verifyJWT as any, schema: Contracts.NewNote }, Controllers.NewNote);
+
+	// Update Note Route
+	app.patch("/:ID", { preHandler: app.verifyJWT as any, schema: Contracts.UpdateNote }, Controllers.UpdateNote);
 };
 
 export default noteRoutes;
