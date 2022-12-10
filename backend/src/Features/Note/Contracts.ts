@@ -31,26 +31,20 @@ export const GetNotesPage = {
 		Page: Type.Number({ minimum: 1 }),
 	}),
 	response: {
-		200: Type.Object(
-			{
-				Notes: Type.Array(
-					Type.Object({
-						ID: Type.String({ format: "uuid" }),
-						Name: Type.String(),
-						Text: Type.String(),
-					}),
-				),
-				Total: Type.Number(),
-				StatusCode: Type.String({ default: "OK" }),
-			},
-			{ description: "OK" },
-		),
-		500: Type.Object(
-			{
-				StatusCode: Type.String({ default: "ERROR" }),
-				ErrorMessage: Type.String(),
-			},
-			{ description: "ERROR" },
-		),
+		200: Type.Object({
+			Notes: Type.Array(
+				Type.Object({
+					ID: Type.String({ format: "uuid" }),
+					Name: Type.String(),
+					Text: Type.String(),
+				}),
+			),
+			Total: Type.Number(),
+			StatusCode: Type.String({ default: "OK" }),
+		}),
+		500: Type.Object({
+			StatusCode: Type.String({ default: "ERROR" }),
+			ErrorMessage: Type.String(),
+		}),
 	},
 };

@@ -17,7 +17,7 @@ const buildApp = async () => {
 
 	// Plugins
 	await app.register(FastifySwagger, { swagger: { securityDefinitions: { bearer: { type: "apiKey", name: "JWT", in: "Header" } } } });
-	await app.register(FastifySwaggerUI);
+	await app.register(FastifySwaggerUI, { routePrefix: "/docs", uiConfig: { supportedSubmitMethods: [] } });
 	await app.register(FastifyCORS, { origin: ["http://localhost:5173", "http://127.0.0.1:5173"] });
 	await app.register(FastifyJWT, { secret: String(process.env.JWT_SECRET) });
 	app.after(() => console.log("PLUGINS -------> LOADED"));
