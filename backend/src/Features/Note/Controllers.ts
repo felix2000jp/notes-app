@@ -6,7 +6,10 @@ import PermissionErrors from "../../Errors/PermissionErrors";
 import * as Contracts from "./Contracts";
 
 // Get Note Controller
-export const GetNote = async (req: FastifyRequest<{ Params: typeof Contracts.GetNote.params.static }>, res: FastifyReply) => {
+export const GetNote = async (
+	req: FastifyRequest<{ Params: typeof Contracts.GetNote.params.static }>,
+	res: FastifyReply,
+) => {
 	try {
 		// We verify that the note exists
 		const note = await prisma.note.findUnique({ where: { ID: req.user.ID } });

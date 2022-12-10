@@ -15,9 +15,12 @@ import noteRoutes from "./Features/Note/Routes";
 const buildApp = async () => {
 	const app = Fastify();
 
-	// Plugins
-	await app.register(FastifySwagger, { swagger: { securityDefinitions: { bearer: { type: "apiKey", name: "JWT", in: "Header" } } } });
+	// Swagger
+	await app.register(FastifySwagger, { swagger: { info: { title: "Notes Web App", version: "1.0.0" } } });
 	await app.register(FastifySwaggerUI, { routePrefix: "/docs", uiConfig: { supportedSubmitMethods: [] } });
+	app.after(() => console.log("SWAGGER -------> LOADED"));
+
+	// Plugins
 	await app.register(FastifyCORS, { origin: ["http://localhost:5173", "http://127.0.0.1:5173"] });
 	await app.register(FastifyJWT, { secret: String(process.env.JWT_SECRET) });
 	app.after(() => console.log("PLUGINS -------> LOADED"));

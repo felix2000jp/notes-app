@@ -34,7 +34,7 @@ export const SignIn = async (req: FastifyRequest<{ Body: typeof Contracts.SignIn
 		if (!isValid) throw new Error(UserErrors.USER_PASSWORD);
 
 		// We create the AccessToken and return the response
-		const accessToken = await res.jwtSign({ ID: user.ID }, { expiresIn: "30d" });
+		const accessToken = await res.jwtSign({ ID: user.ID }, { expiresIn: "3h" });
 		return await res.status(200).send({ AccessToken: accessToken });
 	} catch (error) {
 		return await res.status(500).send({ ErrorMessage: (error as Error).message });

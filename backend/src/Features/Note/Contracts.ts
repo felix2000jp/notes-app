@@ -4,7 +4,6 @@ import { Type } from "@sinclair/typebox";
 export const GetNote = {
 	tags: ["Note"],
 	description: "Get one note information given its ID.",
-	security: [{ bearer: [] }],
 	params: Type.Object({
 		ID: Type.String({ format: "uuid" }),
 	}),
@@ -26,7 +25,6 @@ export const GetNote = {
 export const GetNotesPage = {
 	tags: ["Note"],
 	description: "Get one page of notes. Each page has 10 notes.",
-	security: [{ bearer: [] }],
 	querystring: Type.Object({
 		Page: Type.Number({ minimum: 1 }),
 	}),
