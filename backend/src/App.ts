@@ -1,13 +1,10 @@
 import Fastify from "fastify";
-import fastifySwagger from "@fastify/swagger";
-import FastifySwaggerUi from "@fastify/swagger-ui";
+
+import FastifySwagger from "@fastify/swagger";
+import FastifySwaggerUI from "@fastify/swagger-ui";
+
 import FastifyCORS from "@fastify/cors";
 import FastifyJWT from "@fastify/jwt";
-
-import SwaggerConfig from "./Configs/SwaggerConfig";
-import CORSConfig from "./Configs/CORSConfig";
-import JWTConfig from "./Configs/JWTConfig";
-import SwaggerUIConfig from "./Configs/SwaggerUIConfig";
 
 import verifyJWT from "./Decorators/JWT";
 
@@ -18,11 +15,11 @@ import noteRoutes from "./Features/Note/Routes";
 const buildApp = async () => {
 	const app = Fastify();
 
-	// Plugin
-	await app.register(fastifySwagger, SwaggerConfig);
-	await app.register(FastifySwaggerUi, SwaggerUIConfig);
-	await app.register(FastifyCORS, CORSConfig);
-	await app.register(FastifyJWT, JWTConfig);
+	// Plugins
+	await app.register(FastifySwagger, { swagger: { securityDefinitions: { bearer: { type: "apiKey", name: "JWT", in: "Header" } } } });
+	await app.register(FastifySwaggerUI);
+	await app.register(FastifyCORS, { origin: ["http://localhost:5173", "http://127.0.0.1:5173"] });
+	await app.register(FastifyJWT, { secret: String(process.env.JWT_SECRET) });
 	app.after(() => console.log("PLUGINS -------> LOADED"));
 
 	// Decorators
