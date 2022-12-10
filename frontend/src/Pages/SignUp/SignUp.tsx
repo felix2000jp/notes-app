@@ -1,8 +1,8 @@
 import { Link } from "react-router-dom";
-import useSignIn from "./SignIn.logic";
+import useSignUp from "./SignUp.logic";
 
-const SignIn = () => {
-	const logic = useSignIn();
+const SignUp = () => {
+	const logic = useSignUp();
 
 	return (
 		<>
@@ -31,16 +31,22 @@ const SignIn = () => {
 									<input className="input is-primary" type="password" placeholder="********" ref={logic.passwordRef} />
 								</div>
 							</div>
+							<div className="field">
+								<label className="label">Confirm Password</label>
+								<div className="control">
+									<input className="input is-primary" type="password" placeholder="********" ref={logic.confirmRef} />
+								</div>
+							</div>
 							<div className="buttons">
 								<button
 									className={`button is-primary has-text-link ${logic.loading && "is-loading"}`}
 									disabled={logic.loading}
-									onClick={logic.SignInButton}
+									onClick={logic.SignUpButton}
 								>
-									Sign In
-								</button>
-								<Link to="/signup" className="button is-primary has-text-link">
 									Sign Up
+								</button>
+								<Link to="/signin" className="button is-primary has-text-link">
+									Sign In
 								</Link>
 							</div>
 							<div className="has-text-centered">
@@ -54,4 +60,4 @@ const SignIn = () => {
 	);
 };
 
-export default SignIn;
+export default SignUp;
