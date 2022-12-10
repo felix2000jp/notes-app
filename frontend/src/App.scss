@@ -20,6 +20,9 @@ $desktop    : 850px;
 $widescreen : 1150px;
 $fullhd     : 1350px;
 
+// Navbar
+$navbar-breakpoint : $tablet;
+
 @import "../node_modules/bulma/sass/base/_all.sass";
 @import "../node_modules/bulma/sass/components/_all.sass";
 @import "../node_modules/bulma/sass/elements/_all.sass";
