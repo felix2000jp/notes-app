@@ -1,10 +1,14 @@
-interface NoteProps {
+import useNote from "./Note.logic";
+
+type NoteProps = {
+	ID: string;
 	Name: string;
 	Text: string;
-	CreatedAt: Date;
-}
+	CreatedAt: string;
+};
 
 const Note = (props: NoteProps) => {
+	const logic = useNote(props.ID);
 	return (
 		<div className="card has-background-link">
 			<header className="card-header">
@@ -15,12 +19,14 @@ const Note = (props: NoteProps) => {
 					{props.Text}
 					<br />
 					<br />
-					<time className="has-text-primary">{props.CreatedAt.getDate()}</time>
+					<time className="has-text-primary">{props.CreatedAt}</time>
 				</div>
 			</div>
 			<footer className="card-footer">
 				<button className="button is-warning is-fullwidth is-flex is-justify-content-center">Update</button>
-				<button className="button is-danger is-fullwidth is-flex is-justify-content-center">Delete</button>
+				<button className="button is-danger is-fullwidth is-flex is-justify-content-center" onClick={logic.deleteNote}>
+					Delete
+				</button>
 			</footer>
 		</div>
 	);

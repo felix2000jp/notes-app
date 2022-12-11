@@ -1,7 +1,7 @@
 import { useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
-import * as AuthService from "../../Services/AuthService";
+import * as AuthService from "../../Services/Auth/Service";
 
 const useSignIn = () => {
 	// Navigation
@@ -32,14 +32,14 @@ const useSignIn = () => {
 		// We signin and verify if we have an ERROR or an OK
 		setLoading(true);
 		const response = await AuthService.SignIn(emailRef.current.value, passwordRef.current.value);
-		if (response.Status === "OK") {
+		if (response.StatusCode === "OK") {
 			navigate("/");
 			return "OK";
 		}
 
 		setLoading(false);
 		setError(true);
-		setErrorMessage(response.Status);
+		setErrorMessage(response.StatusCode);
 		return "ERROR";
 	};
 

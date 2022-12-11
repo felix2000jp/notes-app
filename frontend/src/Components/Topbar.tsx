@@ -1,6 +1,6 @@
-interface TopbarProps {
+type TopbarProps = {
 	Email: string;
-}
+};
 
 const Topbar = (props: TopbarProps) => {
 	return (
