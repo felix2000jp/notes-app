@@ -9,7 +9,7 @@ export const GetNote = {
 	}),
 	response: {
 		200: Type.Object({
-			CreatedAt: Type.String({ format: "date-time" }),
+			CreatedAt: Type.String({ format: "date" }),
 			ID: Type.String({ format: "uuid" }),
 			Name: Type.String(),
 			Text: Type.String(),

@@ -27,7 +27,7 @@ export const GetNotesPage = async (
 	res: FastifyReply,
 ) => {
 	try {
-		const notesPerPage = 10;
+		const notesPerPage = 12;
 
 		// We get the total number of notes belonging to this user and and a page of 10 notes ordered by their name
 		const total = await prisma.note.count({ where: { UserID: req.user.ID } });
