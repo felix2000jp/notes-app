@@ -18,22 +18,27 @@ export const SignIn = async (Email: string, Password: string) => {
 		return { Status: "OK" };
 	} catch (error) {
 		const err = error as AxiosError<SignInResponseERROR>;
-		console.log(err);
 		if (err.response?.data.StatusCode === "ERROR") return { Status: err.response?.data.ErrorMessage };
 		return { Status: "Something went wrong" };
 	}
 };
 
+interface SignUpResponseOK {
+	StatusCode: string;
+}
+
+interface SignUpResponseERROR {
+	StatusCode: string;
+	ErrorMessage: string;
+}
+
 export const SignUp = async (Email: string, Password: string) => {
 	try {
-		await ApiClient.post("/api/auth/signup", { Email, Password });
+		await ApiClient.post<SignUpResponseOK>("/api/auth/signup", { Email, Password });
 		return { Status: "OK" };
 	} catch (error) {
-		if (error instanceof AxiosError) {
-			if (error.response?.data.StatusCode === "ERROR") return { Status: "ERROR", ErrorMessage: error.response?.data.ErrorMessage };
-			return { Status: "ERROR", ErrorMessage: "Something went wrong" };
-		} else {
-			return { Status: "ERROR", ErrorMessage: "Something went wrong" };
-		}
+		const err = error as AxiosError<SignUpResponseERROR>;
+		if (err.response?.data.StatusCode === "ERROR") return { Status: err.response?.data.ErrorMessage };
+		return { Status: "Something went wrong" };
 	}
 };
