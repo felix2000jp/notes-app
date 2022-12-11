@@ -1,7 +1,11 @@
+import useHome from "./Home.logic";
+
 import Topbar from "../../Components/Topbar";
 
 const Home = () => {
-	return <Topbar Email="felix@notes-app.dev" />;
+	const logic = useHome();
+
+	return <Topbar Email={logic.user.Email} />;
 };
 
 export default Home;

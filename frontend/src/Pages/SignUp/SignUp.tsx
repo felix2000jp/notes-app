@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+
 import useSignUp from "./SignUp.logic";
 
 const SignUp = () => {
