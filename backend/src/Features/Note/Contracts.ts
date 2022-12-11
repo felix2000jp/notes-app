@@ -33,7 +33,7 @@ export const GetNotesPage = {
 		200: Type.Object({
 			Notes: Type.Array(
 				Type.Object({
-					CreatedAt: Type.String({ format: "date-time" }),
+					CreatedAt: Type.String({ format: "date" }),
 					ID: Type.String({ format: "uuid" }),
 					Name: Type.String(),
 					Text: Type.String(),
