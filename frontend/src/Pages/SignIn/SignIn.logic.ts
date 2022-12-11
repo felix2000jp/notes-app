@@ -32,15 +32,12 @@ const useSignIn = () => {
 		// We signin and verify if we have an ERROR or an OK
 		setLoading(true);
 		const response = await AuthService.SignIn(emailRef.current.value, passwordRef.current.value);
-		if (response.Status === "ERROR") {
-			setLoading(false);
-			setError(true);
-			setErrorMessage(response.ErrorMessage);
-			return "ERROR";
-		}
+		if (response.Status === "OK") navigate("/");
 
-		navigate("/");
-		return "OK";
+		setLoading(false);
+		setError(true);
+		setErrorMessage(response.Status);
+		return "ERROR";
 	};
 
 	return { emailRef, passwordRef, error, errorMessage, loading, SignInButton };

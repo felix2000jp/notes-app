@@ -1,11 +1,10 @@
 import { AxiosError } from "axios";
-import UserDTO from "../DTOs/UserDTO";
 import ApiClient from "./ApiClient";
 
-export const GetSignedInUser = async () => {
+export const GetNotesPage = async () => {
 	try {
-		const user = await ApiClient.get<UserDTO>("/api/user");
-		return { Status: "OK", ID: user.data.ID, Email: user.data.Email };
+		const notes = await ApiClient.get("/api/note");
+		return { Status: "OK", Notes: notes.data.Notes, Total: notes.data.Total };
 	} catch (error) {
 		if (error instanceof AxiosError) {
 			if (error.response?.data.StatusCode === "ERROR") return { Status: "ERROR", ErrorMessage: error.response?.data.ErrorMessage };
