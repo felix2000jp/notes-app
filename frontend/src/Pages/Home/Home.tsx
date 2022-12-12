@@ -21,7 +21,7 @@ const Home = () => {
 			<footer className="section">
 				<nav className="pagination">
 					<ul className="pagination-list">
-						{Array.from(Array(logic.pages).keys()).map((page) => (
+						{Array.from(Array(logic.notes.Pages).keys()).map((page) => (
 							<li key={page}>
 								<button className="pagination-link" value={page + 1} onClick={logic.changePage}>
 									{page + 1}

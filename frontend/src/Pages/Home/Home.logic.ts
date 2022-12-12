@@ -1,23 +1,20 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
+import useNotesStore from "../../Stores/NotesStore";
+
 import * as UserService from "../../Services/User/Service";
 import * as NoteService from "../../Services/Note/Service";
-
-type NotesState = {
-	Notes: { ID: string; Name: string; Text: string; CreatedAt: string }[];
-	Total: number;
-};
 
 const useHome = () => {
 	// Navigation
 	const navigate = useNavigate();
-	const [page, setPage] = useState(1);
-	const [pages, setPages] = useState(1);
 
 	// User
 	const [user, setUser] = useState<string>("");
-	const [notes, setNotes] = useState<NotesState>();
+
+	// Notes
+	const notes = useNotesStore();
 
 	// Get User and Notes
 	useEffect(() => {
@@ -36,26 +33,28 @@ const useHome = () => {
 	}, []);
 
 	useEffect(() => {
+		console.log("yo");
 		const getNotes = async () => {
-			const response = await NoteService.GetNotesPage(page);
+			const response = await NoteService.GetNotesPage(notes.Page);
 			if (response.StatusCode === "ERROR") {
 				navigate("/signin");
 				return "ERROR";
 			}
 
-			setNotes({ Notes: response.Notes, Total: response.Total });
-			setPages(Math.ceil(response.Total / 12));
+			notes.setNotes(response.Notes);
+			notes.setTotal(response.Total);
+			notes.setPages();
 			return "OK";
 		};
 		getNotes().catch(console.error);
-	}, [page, notes]);
+	}, [notes.Page]);
 
 	// Buttons
 	const changePage = (event: React.MouseEvent<HTMLButtonElement>) => {
-		setPage(Number(event.currentTarget.value));
+		notes.setPage(Number(event.currentTarget.value));
 	};
 
-	return { user, notes, page, pages, changePage };
+	return { user, notes, changePage };
 };
 
 export default useHome;
