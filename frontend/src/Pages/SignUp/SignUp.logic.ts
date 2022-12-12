@@ -48,7 +48,7 @@ const useSignUp = () => {
 
 		setLoading(false);
 		setError(true);
-		setErrorMessage(response.StatusCode);
+		setErrorMessage(response.ErrorMessage);
 		return "ERROR";
 	};
 

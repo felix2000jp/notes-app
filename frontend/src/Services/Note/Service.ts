@@ -24,3 +24,15 @@ export const DeleteNote = async (ID: string): Promise<typeof Contracts.DeleteNot
 		return { StatusCode: "ERROR", ErrorMessage: "Something went wrong" };
 	}
 };
+
+export const UpdateNote = async (ID: string, Name?: string, Text?: string): Promise<typeof Contracts.UpdateNote.RETURNS.static> => {
+	try {
+		console.log(typeof Text);
+		const response = await ApiClient.patch<typeof Contracts.UpdateNote.OK.static>(`/api/note/${ID}`, { Name: Name, Text: Text });
+		return response.data;
+	} catch (error) {
+		const err = error as AxiosError<typeof Contracts.UpdateNote.ERROR.static>;
+		if (err.response?.data.StatusCode === "ERROR") return err.response.data;
+		return { StatusCode: "ERROR", ErrorMessage: "Something went wrong" };
+	}
+};

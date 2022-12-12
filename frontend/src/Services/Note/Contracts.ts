@@ -36,3 +36,17 @@ export const DeleteNote = {
 		return Type.Union([this.OK, this.ERROR]);
 	},
 };
+
+export const UpdateNote = {
+	OK: Type.Object({
+		StatusCode: Type.Literal("OK"),
+	}),
+	ERROR: Type.Object({
+		StatusCode: Type.Literal("ERROR"),
+		ErrorMessage: Type.String(),
+	}),
+
+	get RETURNS() {
+		return Type.Union([this.OK, this.ERROR]);
+	},
+};
