@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 
 import useNotesStore from "../../Stores/NotesStore";
@@ -15,6 +15,46 @@ const useHome = () => {
 
 	// Notes
 	const notes = useNotesStore();
+
+	// New note
+	// Input
+	const nameRef = useRef<HTMLInputElement>(null);
+	const textRef = useRef<HTMLInputElement>(null);
+	// Errors
+	const [errorMessage, setErrorMessage] = useState("");
+	// Modal
+	const [modal, setModal] = useState(false);
+
+	const NewNote = async () => {
+		const name = nameRef.current?.value;
+		const text = textRef.current?.value;
+		if (!name || !text) {
+			setErrorMessage("Please fill both the name and text");
+			return "ERROR";
+		}
+
+		const response = await NoteService.NewNote(name, text);
+		if (response.StatusCode === "ERROR") {
+			setErrorMessage(response.ErrorMessage);
+			return "ERROR";
+		}
+
+		const notesResponse = await NoteService.GetNotesPage(notes.Page);
+		if (notesResponse.StatusCode === "ERROR") return "ERROR";
+
+		notes.setNotes(notesResponse.Notes);
+		notes.setTotal(notesResponse.Total);
+		notes.setPages();
+		setModal(false);
+		return "OK";
+	};
+
+	const closeModal = async () => {
+		setModal(false);
+	};
+	const openModal = async () => {
+		setModal(true);
+	};
 
 	// Get User and Notes
 	useEffect(() => {
@@ -33,7 +73,6 @@ const useHome = () => {
 	}, []);
 
 	useEffect(() => {
-		console.log("yo");
 		const getNotes = async () => {
 			const response = await NoteService.GetNotesPage(notes.Page);
 			if (response.StatusCode === "ERROR") {
@@ -54,7 +93,7 @@ const useHome = () => {
 		notes.setPage(Number(event.currentTarget.value));
 	};
 
-	return { user, notes, changePage };
+	return { user, notes, changePage, modal, nameRef, textRef, errorMessage, NewNote, closeModal, openModal };
 };
 
 export default useHome;

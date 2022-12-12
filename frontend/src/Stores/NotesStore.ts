@@ -20,7 +20,7 @@ const useNotesStore = create<NotesState>((set) => ({
 	Page: 1,
 	setNotes: (Notes) => set((state) => ({ ...state, Notes: Notes })),
 	setTotal: (Total) => set((state) => ({ ...state, Total: Total })),
-	setPages: () => set((state) => ({ ...state, Pages: Math.ceil(state.Total / 12) })),
+	setPages: () => set((state) => ({ ...state, Pages: Math.ceil(state.Total / 11) })),
 	setPage: (Page) => set((state) => ({ ...state, Page: Page })),
 	create: (Note) => set((state) => ({ ...state, Notes: [...state.Notes, Note] })),
 	delete: (ID) => set((state) => ({ ...state, Notes: state.Notes.filter((note) => note.ID !== ID) })),

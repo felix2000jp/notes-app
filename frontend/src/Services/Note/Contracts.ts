@@ -50,3 +50,17 @@ export const UpdateNote = {
 		return Type.Union([this.OK, this.ERROR]);
 	},
 };
+
+export const NewNote = {
+	OK: Type.Object({
+		StatusCode: Type.Literal("OK"),
+	}),
+	ERROR: Type.Object({
+		StatusCode: Type.Literal("ERROR"),
+		ErrorMessage: Type.String(),
+	}),
+
+	get RETURNS() {
+		return Type.Union([this.OK, this.ERROR]);
+	},
+};
