@@ -21,7 +21,7 @@ const buildApp = async () => {
 	app.after(() => console.log("SWAGGER -------> LOADED"));
 
 	// Plugins
-	await app.register(FastifyCORS, { origin: ["http://localhost:5173", "http://127.0.0.1:5173"] });
+	await app.register(FastifyCORS, { origin: ["https://notes-web-app-frontend-production-5116.up.railway.app"] });
 	await app.register(FastifyJWT, { secret: String(process.env.JWT_SECRET) });
 	app.after(() => console.log("PLUGINS -------> LOADED"));
 
