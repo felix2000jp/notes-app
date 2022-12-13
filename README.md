@@ -10,6 +10,6 @@ To try without registering you can use the account **Email: felix@notes-app.dev*
 
 This how the app looks both on desktop and mobile: 
 
-![Desktop view](/destop-view.png "Desktop")
+![Desktop view](/desktop-view.png "Desktop")
 
 ![Mobile view](/mobile-view.jpeg "Mobile")
